@@ -29,6 +29,7 @@ export const mockAnalysisResponse = {
             }
         ]
     },
+    // propaganda: null,
     propaganda: {
         body: "Some sources use emotionally charged language when referring to 'incursions' or 'violations', which may suggest bias toward portraying Ukraine's actions as aggressive.",
         leftSideName: "Ukrainian Government",
@@ -47,5 +48,6 @@ export const mockAnalysisResponse = {
                 description: "Descriptions emphasize the potential for escalation or broader conflict, likely to provoke anxiety."
             }
         ]
-    }
+    },
+    error: null
 };

@@ -1,15 +1,24 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { resolve } from 'path';
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
   build: {
     outDir: 'dist',
     rollupOptions: {
       input: {
-        popup: 'index.html'
+        popup: resolve(__dirname, 'index.html'),
+        sidebar: resolve(__dirname, 'public/sidebar.html'),
+        contentScript: resolve(__dirname, 'src/contentScript.ts'),
+      },
+      output: {
+        entryFileNames: (chunk) => {
+          if (chunk.name === 'contentScript') return 'assets/contentScript.js';
+          if (chunk.name === 'sidebar') return 'assets/sidebar.js';
+          return 'assets/[name].js';
+        }
       }
     }
   }
-})
+});

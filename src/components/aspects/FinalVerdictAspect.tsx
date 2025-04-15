@@ -1,4 +1,4 @@
-import {Card, CircularProgress, Divider, Stack, Typography} from "@mui/joy";
+import {Card, CircularProgress, Stack, Typography} from "@mui/joy";
 
 export type FinalVerdictAspectProps = {
     authenticity: number;
@@ -13,7 +13,7 @@ function getColor(value: number) {
     return '#4caf50'; // Green
 }
 
-export function FinalVerdictAspect({authenticity, body, displayText, verdict}: FinalVerdictAspectProps) {
+export function FinalVerdictAspect({authenticity, body}: FinalVerdictAspectProps) {
     const strokeColor = getColor(authenticity);
 
     return (

@@ -70,7 +70,7 @@ export function Source({title, url, date, body, support}: SourceProps) {
             <SupportIndicator value={support}/>
 
             <Stack alignItems="end" spacing={1}>
-                <Typography typography="body-sm" fontSize="12px" color="neutral">{date}</Typography>
+                <Typography typography="body-sm" fontSize="12px" color="neutral" textColor="neutral.400">{date}</Typography>
             </Stack>
         </Card>
     )
@@ -87,6 +87,7 @@ export function SourceSupportAspect({body, sources}: SourceSupportAspectProps) {
             <Stack justifyContent="space-between" direction="row">
                 <Typography typography="title-lg">Source Support</Typography>
                 <Tooltip
+                    disablePortal
                     title={
                         <Box sx={{maxWidth: "400px"}}>
                             <Typography typography="body-sm" noWrap={false}>Shows how each source evaluates the claim —
@@ -99,7 +100,7 @@ export function SourceSupportAspect({body, sources}: SourceSupportAspectProps) {
                     placement="top"
                 >
                     <IconButton size="sm">
-                        <InfoOutlineIcon/>
+                        <InfoOutlineIcon htmlColor='#9FA6AD' />
                     </IconButton>
                 </Tooltip>
             </Stack>
@@ -114,28 +115,6 @@ export function SourceSupportAspect({body, sources}: SourceSupportAspectProps) {
                     support={source.support}
                 />
             ))}
-
-            {/*<Source*/}
-            {/*    title="Dow Jones Plunges Amid Tariff Concerns"*/}
-            {/*    url="https://www.bloomberg.com/news/articles/2024-11-01/dow-jones-plunges-amid-tariff-concerns"*/}
-            {/*    date="2024-11-01"*/}
-            {/*    body="The article discusses the market's adverse reaction to tariff announcements without specifying a drop of 2,000 points."*/}
-            {/*    support="Neutral"*/}
-            {/*/>*/}
-            {/*<Source*/}
-            {/*    title="Market Reaction to Tariff Announcement"*/}
-            {/*    url="https://www.reuters.com/markets/us-shares-sink-tariff-revisions-2024-11-01/"*/}
-            {/*    date="2024-11-01"*/}
-            {/*    body="The piece states that U.S. shares, including the Dow, sank amid fears of revised tariffs but lacks specific point details."*/}
-            {/*    support="Neutral"*/}
-            {/*/>*/}
-            {/*<Source*/}
-            {/*    title="Dow Jones Experiences Severe Losses After Tariff News"*/}
-            {/*    url="https://www.cnbc.com/2024/11/01/dow-jones-experiences-severe-losses-after-tariff-news.html"*/}
-            {/*    date="2024-11-01"*/}
-            {/*    body="The report elaborates on the overall drop in the Dow without specifying that it was 2,000 points."*/}
-            {/*    support="Neutral"*/}
-            {/*/>*/}
         </Card>
     )
 }

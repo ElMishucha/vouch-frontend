@@ -1,11 +1,29 @@
 {
     "manifest_version": 3,
-    "name": "Vouch Extension",
+    "name": "Vouch Sidebar Extension",
     "version": "1.0",
-    "description": "End-of-Year Project",
+    "description": "A sidebar injected into every webpage",
     "action": {
         "default_popup": "index.html"
     },
+    "content_scripts": [
+        {
+            "matches": ["<all_urls>"],
+            "js": ["assets/contentScript.js"]
+        }
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "web_accessible_resources": [
+        {
+            "resources": ["assets/sidebar.js", "assets/*.js", "assets/*.css"],
+            "matches": ["<all_urls>"]
+        }
+    ],
+    "permissions": [
+        "contextMenus"
+    ],
     "icons": {
         "16": "icons/icon16.png",
         "48": "icons/icon48.png",
