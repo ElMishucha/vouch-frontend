@@ -16,6 +16,8 @@ export const mockAnalysisResponse = {
             {
                 title: "Zelensky Acknowledges Ukrainian Operations in Belgorod Region",
                 url: "https://www.reuters.com/world/europe/zelensky-says-ukrainian-troops-have-entered-russia-belgorod-region-2024-11-01/",
+                snippet: "snippet1",
+                source: "test1",
                 date: "2024-11-01",
                 body: "Zelensky states that Ukrainian troops are present in Russia’s Belgorod region.",
                 support: "Strongly Support"
@@ -23,31 +25,34 @@ export const mockAnalysisResponse = {
             {
                 title: "Ukrainian Troops Engage Inside Russian Territory",
                 url: "https://www.cnn.com/2024/11/01/europe/ukraine-belgorod-operations/index.html",
+                snippet: "snippet2",
+                source: "test2",
                 date: "2024-11-01",
                 body: "The article discusses the engagement of Ukrainian troops in Belgorod and mentions operations in other regions.",
                 support: "Strongly Support"
             }
         ]
     },
-    // propaganda: null,
-    propaganda: {
-        body: "Some sources use emotionally charged language when referring to 'incursions' or 'violations', which may suggest bias toward portraying Ukraine's actions as aggressive.",
-        leftSideName: "Ukrainian Government",
-        rightSideName: "Russian State Media",
-        biasSlider: 40
-    },
-    persuasiveStrategies: {
-        body: "Certain headlines and quotes appear to use persuasive techniques aimed at amplifying the threat or urgency of the situation.",
-        techniques: [
-            {
-                name: "Loaded Language",
-                description: "Phrases like 'deep incursion' or 'brazen violation' are used to evoke emotional reactions."
-            },
-            {
-                name: "Appeal to Fear",
-                description: "Descriptions emphasize the potential for escalation or broader conflict, likely to provoke anxiety."
-            }
-        ]
-    },
-    error: null
+    propaganda: null,
+    // propaganda: {
+    //     body: "Some sources use emotionally charged language when referring to 'incursions' or 'violations', which may suggest bias toward portraying Ukraine's actions as aggressive.",
+    //     leftSideName: "Ukrainian Government",
+    //     rightSideName: "Russian State Media",
+    //     biasSlider: 40
+    // },
+    persuasiveStrategies: null,
+    // persuasiveStrategies: {
+    //     body: "Certain headlines and quotes appear to use persuasive techniques aimed at amplifying the threat or urgency of the situation.",
+    //     techniques: [
+    //         {
+    //             name: "Loaded Language",
+    //             description: "Phrases like 'deep incursion' or 'brazen violation' are used to evoke emotional reactions."
+    //         },
+    //         {
+    //             name: "Appeal to Fear",
+    //             description: "Descriptions emphasize the potential for escalation or broader conflict, likely to provoke anxiety."
+    //         }
+    //     ]
+    // },
+    error: "Hello"
 };

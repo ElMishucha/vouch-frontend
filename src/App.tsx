@@ -81,38 +81,37 @@ function App() {
 
         // Real Fetch:
         fetch("http://localhost:8081/fact_check", {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ claim: text })
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({claim: text})
         })
-          .then(res => res.json())
-          .then(res => {
-            setData(res.analysisResponse);
-          })
-          .catch(err => {
-              console.error("Failed to fetch:", err);
-              setError("Something went wrong. Please try again later.");
-          })
-          .finally(() => setDataLoading(false));
+            .then(res => res.json())
+            .then(res => {
+                if (res.error != null) {
+                    console.error(res.error);
+                    setError(res.error);
+                    return;
+                }
+
+                if (res.analysisResponse == null) {
+                    console.error("res.analysisResponse is null");
+                    setError("Something went wrong. Please try again later.");
+                    return;
+                }
+
+                setData(res.analysisResponse);
+            })
+            .catch(err => {
+                console.error("Failed to fetch:", err);
+                setError("Something went wrong. Please try again later.");
+            })
+            .finally(() => setDataLoading(false));
     };
 
     // Handle Close Button
     const handleClose = () => {
         setSidebarOpen(false);
     }
-
-    // Check for data
-    useEffect(() => {
-        if (data == null) {
-            setError("Data not found");
-            return;
-        }
-
-        // Check for data's errors
-        if (data.error != null) {
-            setError(data.error);
-        }
-    }, [data]);
 
 
     return (
@@ -167,34 +166,34 @@ function App() {
                             </motion.div>
                         ) : data != null ? (
                             <Stack sx={{paddingBottom: "60px"}} spacing={2}>
-                            {[
-                                data.finalVerdict && <FinalVerdictAspect {...data.finalVerdict} />,
-                                data.factualClarification &&
-                                <FactualClarificationAspect {...data.factualClarification} />,
-                                data.propaganda && <PropagandaAspect {...data.propaganda} />,
-                                data.sourceSupport && <SourceSupportAspect {...data.sourceSupport} />,
-                                data.persuasiveStrategies &&
-                                <PersuasiveStrategiesAspect {...data.persuasiveStrategies} />,
-                            ]
-                                .filter(Boolean)
-                                .map((Component, index) => (
-                                    <MotionBox
-                                        key={index}
-                                        initial={{opacity: 0, x: -30}}
-                                        animate={{opacity: 1, x: 0}}
-                                        transition={{delay: index * 0.2, duration: 0.5}}
-                                    >
-                                        {Component}
-                                    </MotionBox>
-                                ))}
+                                {[
+                                    data.finalVerdict && <FinalVerdictAspect {...data.finalVerdict} />,
+                                    data.factualClarification &&
+                                    <FactualClarificationAspect {...data.factualClarification} />,
+                                    data.propaganda && <PropagandaAspect {...data.propaganda} />,
+                                    data.sourceSupport && <SourceSupportAspect {...data.sourceSupport} />,
+                                    data.persuasiveStrategies &&
+                                    <PersuasiveStrategiesAspect {...data.persuasiveStrategies} />,
+                                ]
+                                    .filter(Boolean)
+                                    .map((Component, index) => (
+                                        <MotionBox
+                                            key={index}
+                                            initial={{opacity: 0, x: -30}}
+                                            animate={{opacity: 1, x: 0}}
+                                            transition={{delay: index * 0.2, duration: 0.5}}
+                                        >
+                                            {Component}
+                                        </MotionBox>
+                                    ))}
 
-                            <Box sx={{mt: 4, pt: 2, borderTop: '1px solid', borderColor: 'divider'}}>
-                                <Typography typography="body-sm" textAlign="center" color="neutral"
-                                            textColor="neutral.400">
-                                    © 2025 Vouch • All rights reserved
-                                </Typography>
-                            </Box>
-                        </Stack>) : null
+                                <Box sx={{mt: 4, pt: 2, borderTop: '1px solid', borderColor: 'divider'}}>
+                                    <Typography typography="body-sm" textAlign="center" color="neutral"
+                                                textColor="neutral.400">
+                                        © 2025 Vouch • All rights reserved
+                                    </Typography>
+                                </Box>
+                            </Stack>) : null
                     }
                 </Stack>
             </Stack>

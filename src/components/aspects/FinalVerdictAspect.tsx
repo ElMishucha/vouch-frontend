@@ -28,7 +28,7 @@ export function FinalVerdictAspect({authenticity, body}: FinalVerdictAspectProps
                     {/*</Card>*/}
                     {/*<Typography>{verdict}</Typography>*/}
                 </Stack>
-                <Stack alignItems="center" justifyContent="center" spacing={1}>
+                <Stack alignItems="center" justifyContent="center" spacing={1} sx={{minWidth: "20%"}}>
                     <CircularProgress
                         determinate
                         value={authenticity}

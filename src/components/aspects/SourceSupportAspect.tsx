@@ -47,12 +47,14 @@ export function SupportIndicator({value}: SupportProps) {
 type SourceProps = {
     title: string;
     url: string;
+    snippet: string;
+    source: string;
     date: string;
     body: string;
     support: string;
 };
 
-export function Source({title, url, date, body, support}: SourceProps) {
+export function Source({title, url, snippet, source, date, body, support}: SourceProps) {
     return (
         <Card>
             <Stack direction="row" spacing={1} sx={{display: "flex", alignItems: "center"}}>
@@ -62,6 +64,8 @@ export function Source({title, url, date, body, support}: SourceProps) {
                     <Typography typography="title-sm">{title}</Typography>
                 </Link>
             </Stack>
+
+            <Typography typography="body-sm">Snippet: <i>{snippet} ({source})</i></Typography>
 
             <Typography typography="body-sm">
                 {body}
@@ -110,6 +114,8 @@ export function SourceSupportAspect({body, sources}: SourceSupportAspectProps) {
                 <Source
                     title={source.title}
                     url={source.url}
+                    snippet={source.snippet}
+                    source={source.source}
                     date={source.date}
                     body={source.body}
                     support={source.support}
