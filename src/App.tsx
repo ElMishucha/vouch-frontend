@@ -11,6 +11,7 @@ import {
 import {motion} from "framer-motion";
 import {useEffect, useState} from "react";
 import {mockAnalysisResponse} from "./MockData.ts";
+import {mockDataITDWILOResponse} from "./MockDataIllegalToDriveWithInteriorLightOn.ts";
 import CloseIcon from "@mui/icons-material/Close";
 
 
@@ -79,33 +80,41 @@ function App() {
         //     setDataLoading(false);
         // }, 3000);
 
+        // MDITDWILO Mock Data
+        // setTimeout(() => {
+        //     setData(mockDataITDWILOResponse); // Replace with real fetch call
+        //     setDataLoading(false);
+        // }, 7500);
+
         // Real Fetch:
-        fetch("http://localhost:8081/fact_check", {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({claim: text})
-        })
-            .then(res => res.json())
-            .then(res => {
-                if (res.error != null) {
-                    console.error(res.error);
-                    setError(res.error);
-                    return;
-                }
+        setTimeout(() => {
+            fetch("http://localhost:8081/fact_check", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({claim: text})
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if (res.error != null) {
+                        console.error(res.error);
+                        setError(res.error);
+                        return;
+                    }
 
-                if (res.analysisResponse == null) {
-                    console.error("res.analysisResponse is null");
+                    if (res.analysisResponse == null) {
+                        console.error("res.analysisResponse is null");
+                        setError("Something went wrong. Please try again later.");
+                        return;
+                    }
+
+                    setData(res.analysisResponse);
+                })
+                .catch(err => {
+                    console.error("Failed to fetch:", err);
                     setError("Something went wrong. Please try again later.");
-                    return;
-                }
-
-                setData(res.analysisResponse);
-            })
-            .catch(err => {
-                console.error("Failed to fetch:", err);
-                setError("Something went wrong. Please try again later.");
-            })
-            .finally(() => setDataLoading(false));
+                })
+                .finally(() => setDataLoading(false));
+        }, 3000);
     };
 
     // Handle Close Button
@@ -168,12 +177,10 @@ function App() {
                             <Stack sx={{paddingBottom: "60px"}} spacing={2}>
                                 {[
                                     data.finalVerdict && <FinalVerdictAspect {...data.finalVerdict} />,
-                                    data.factualClarification &&
-                                    <FactualClarificationAspect {...data.factualClarification} />,
-                                    data.propaganda && <PropagandaAspect {...data.propaganda} />,
+                                    data.factualClarification && <FactualClarificationAspect {...data.factualClarification} />,
                                     data.sourceSupport && <SourceSupportAspect {...data.sourceSupport} />,
-                                    data.persuasiveStrategies &&
-                                    <PersuasiveStrategiesAspect {...data.persuasiveStrategies} />,
+                                    data.propaganda && <PropagandaAspect {...data.propaganda} />,
+                                    data.persuasiveStrategies && <PersuasiveStrategiesAspect {...data.persuasiveStrategies} />,
                                 ]
                                     .filter(Boolean)
                                     .map((Component, index) => (
